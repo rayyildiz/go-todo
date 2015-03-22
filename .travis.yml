@@ -1,0 +1,20 @@
+language: go
+go:
+- 1.8.x
+- 1.9.x
+env:
+  global:
+  - SDK_VERSION="1.9.64"
+
+before_script:
+- SDK_URL=https://storage.googleapis.com/appengine-sdks/featured/go_appengine_sdk_linux_amd64-$SDK_VERSION.zip
+- wget $SDK_URL -nv
+- unzip -q go_appengine_sdk_linux_amd64-$SDK_VERSION.zip
+
+script:
+- "./go_appengine/goapp get ."
+- "./go_appengine/goapp build ."
+- "./go_appengine/goapp test ."
+
+notifications:
+  email: false
